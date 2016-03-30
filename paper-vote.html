@@ -110,12 +110,29 @@ Example:
         dislike:{
           type: Number,
           value: 0
+        },
+        likeValue:{
+          type: Number,
+          computed: "_computedLike(like)",
+          notify: true
+        },
+        dislikeValue:{
+          type: Number,
+          computed: "_computedDislike(dislike)",
+          notify: true
         }
       },
       ready: function(){
         this._refreshProgressBar(this.like, this.dislike);
       },
 
+      _computedLike:function(like){
+        return like;
+      },
+
+      _computedDislike:function(dislike){
+        return dislike;
+      },
       _onLike: function(){
         this.like++;
         this._refreshProgressBar(this.like, this.dislike);

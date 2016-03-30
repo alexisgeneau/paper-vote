@@ -2,7 +2,7 @@
   "name": "paper-vote",
   "version": "1.0.7",
   "authors": [
-    "Anonymous <anonymous@example.com>"
+    "Anonymous <contact@alexis-geneau.fr>"
   ],
   "description": "An element providing a solution to no problem in particular.",
   "keywords": [
@@ -12,10 +12,11 @@
   ],
   "main": "paper-vote.html",
   "license": "http://polymer.github.io/LICENSE.txt",
-  "homepage": "https://github.com/<USERNAME>/seed-element/",
+  "homepage": "https://github.com/alexisgeneau/seed-element/",
   "ignore": [
     "/.*",
-    "/test/"
+    "/test/",
+    "web-components"
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#^1.2.0",
