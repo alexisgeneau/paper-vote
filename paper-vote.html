@@ -1,0 +1,142 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+
+<!--
+An element providing a solution to no problem in particular.
+
+Example:
+
+    <paper-vote></paper-vote>
+
+Example:
+
+    <paper-vote>
+      <h2>Hello paper-vote</h2>
+    </paper-vote>
+
+@demo demo/index.html
+@hero hero.svg
+-->
+
+<dom-module id="paper-vote">
+  <template>
+    <style>
+      :host {
+        display: block;
+        box-sizing: border-box;
+      }
+
+      .vote{
+        margin: 10px 0;
+        float: right
+      }
+
+      .vote_bar{
+        position: relative;
+        width: 160px;
+        height: 2px;
+        background-color: #BBB;
+      }
+
+      .vote_progress{
+        position: relative;
+        width: 0%;
+        height:100%;
+        background-color: #0C0;
+      }
+      .vote_btns{
+        float: right;
+      }
+
+      paper-icon-button{
+        width: 34px;
+        height: auto
+      }
+      .like:hover{
+        -webkit-transition: color 300ms ease;
+        -moz-transition: color 300ms ease;
+         -ms-transition: color 300ms ease;
+          -o-transition: color 300ms ease;
+             transition: color 300ms ease;
+        color: #0C0;
+      }
+      .dislike:hover{
+         -webkit-transition: color 300ms ease;
+        -moz-transition: color 300ms ease;
+         -ms-transition: color 300ms ease;
+          -o-transition: color 300ms ease;
+             transition: color 300ms ease;
+        color:#E00;
+      }
+
+    </style>
+
+  <div class="vote">
+    <div class="vote_bar">
+      <div class="vote_progress"></div>
+    </div>
+    <div class="vote_btns">
+      <paper-icon-button class="like" icon="thumb-up" on-tap="_onLike"></paper-icon-button>[[like]]
+      <paper-icon-button class="dislike" icon="thumb-down" on-tap="_onDislike"></paper-icon-button>[[dislike]]
+    </div>
+  </div>
+    
+  </template>
+
+  <script>
+    Polymer({
+      is: 'paper-vote',
+
+      properties: {
+
+        progress:{
+          type: Number
+        },
+        like:{
+          type: Number,
+          value: 0
+        },
+        dislike:{
+          type: Number,
+          value: 0
+        }
+      },
+      ready: function(){
+        this._refreshProgressBar(this.like, this.dislike);
+      },
+
+      _onLike: function(){
+        this.like++;
+        this._refreshProgressBar(this.like, this.dislike);
+      },
+      _onDislike:function(){
+        this.dislike++;
+        this._refreshProgressBar(this.like, this.dislike);
+      },
+
+      _refreshProgressBar:function(like, dislike){
+        if(like == 0 && dislike == 0){
+          this.$$('.vote_bar').style.backgroundColor= "#BBB";
+          this.$$('.vote_progress').style.width= '0%';
+        }else{
+          var progress = like/(like+dislike)*100;
+          this.$$('.vote_bar').style.backgroundColor= "#E00";
+          this.$$('.vote_progress').style.width= progress+'%';
+
+        }
+      }
+
+    });
+  </script>
+</dom-module>
